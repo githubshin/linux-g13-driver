@@ -3,17 +3,17 @@
 
 class G13Action {
 private:
-	int pressed;
+  int pressed;
 
 protected:
-	virtual void key_down();
-	virtual void key_up();
+  virtual void key_down();
+  virtual void key_up();
 
 public:
-	G13Action();
-	virtual ~G13Action();
-	virtual int set(int state);
-	int isPressed();
+  G13Action();
+  virtual ~G13Action();
+  virtual int set(int state);
+  int isPressed();
 };
 
 #endif

@@ -6,18 +6,18 @@
 
 class PassThroughAction : public G13Action {
 private:
-	int keycode;
+  int keycode;
 
 protected:
-	virtual void key_down();
-	virtual void key_up();
+  virtual void key_down();
+  virtual void key_up();
 
 public:
-	PassThroughAction(int code);
-	virtual ~PassThroughAction();
+  PassThroughAction(int code);
+  virtual ~PassThroughAction();
 
-	int getKeyCode();
-	void setKeyCode(int code);
+  int getKeyCode();
+  void setKeyCode(int code);
 };
 
 #endif

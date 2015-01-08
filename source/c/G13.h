@@ -12,35 +12,35 @@ using namespace std;
 
 class G13 {
 private:
-	G13Action            *actions[G13_NUM_KEYS];
+  G13Action *actions[G13_NUM_KEYS];
 
-	libusb_device        *device;
-	libusb_device_handle *handle;
-	int                   uinput_file;
+  libusb_device *device;
+  libusb_device_handle *handle;
+  int uinput_file;
 
-	int                   loaded;
-	int                   keepGoing;
+  int loaded;
+  int keepGoing;
 
-	stick_mode_t          stick_mode;
-	int                   stick_keys[4];
+  stick_mode_t stick_mode;
+  int stick_keys[4];
 
-	int                   bindings;
+  int bindings;
 
-	Macro *loadMacro(int id);
+  Macro *loadMacro(int id);
 
-	int  read();
-	void parse_joystick(unsigned char *buf);
-	void parse_key(int key, unsigned char *byte);
-	void parse_keys(unsigned char *buf);
+  int read();
+  void parse_joystick(unsigned char *buf);
+  void parse_key(int key, unsigned char *byte);
+  void parse_keys(unsigned char *buf);
 
 public:
-	G13(libusb_device *device);
-	~G13();
+  G13(libusb_device *device);
+  ~G13();
 
-	void start();
-	void stop();
-	void loadBindings();
-	void setColor(int r, int g, int b);
+  void start();
+  void stop();
+  void loadBindings();
+  void setColor(int r, int g, int b);
 };
 
 
