@@ -181,9 +181,9 @@ void G13::loadBindings() {
 
     while (file.good()) {
       string line;
-        getline(file, line);
+      getline(file, line);
 
-        char l[1024];
+      char l[1024];
       strcpy(l, (char *)line.c_str());
       trim(l);
       if (strlen(l) > 0) {
@@ -242,7 +242,7 @@ void G13::loadBindings() {
         }
       }
 
-        //cout << line << endl;
+      //cout << line << endl;
     }
 
     file.close();
