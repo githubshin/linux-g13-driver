@@ -167,7 +167,7 @@ Macro *G13::loadMacro(int num) {
 void G13::loadBindings() {
 
   char filename[1024];
-
+  char *strtok_buf;
   sprintf(filename, "%s/.g13/bindings-%d.properties", getenv("HOME"), bindings);
   cout << "loading " << filename << "\n";
 
@@ -187,16 +187,16 @@ void G13::loadBindings() {
       strcpy(l, (char *)line.c_str());
       trim(l);
       if (strlen(l) > 0) {
-        char *key = strtok(l, "=");
+        char *key = strtok_r(l, "=", &strtok_buf);
         if (key[0] == '#') {
           // ignore line
         }
         else if (strcmp(key, "color") == 0) {
-          char *num = strtok(NULL, ",");
+          char *num = strtok_r(NULL, ",", &strtok_buf);
           int r = atoi(num);
-          num = strtok(NULL, ",");
+          num = strtok_r(NULL, ",", &strtok_buf);
           int g = atoi(num);
-          num = strtok(NULL, ",");
+          num = strtok_r(NULL, ",", &strtok_buf);
           int b = atoi(num);
 
           setColor(r, g, b);
@@ -207,11 +207,11 @@ void G13::loadBindings() {
         else if (key[0] == 'G') {
           int gKey = atoi(&key[1]);
           //cout << "gKey = " << gKey << "\n";
-          char *type = strtok(NULL, ",");
+          char *type = strtok_r(NULL, ",", &strtok_buf);
           trim(type);
           //cout << "type = " << type << "\n";
           if (strcmp(type, "p") == 0) { /* passthrough */
-            char *keytype = strtok(NULL, ",\n ");
+            char *keytype = strtok_r(NULL, "", &strtok_buf);
             trim(keytype);
             int keycode = atoi(&keytype[2]);
 
@@ -224,8 +224,8 @@ void G13::loadBindings() {
             actions[gKey] = action;
           }
           else if (strcmp(type, "m") == 0) { /* macro */
-            int macroId = atoi(strtok(NULL, ",\n "));
-            int repeats = atoi(strtok(NULL, ",\n "));
+            int macroId = atoi(strtok_r(NULL, ",\n ", &strtok_buf));
+            int repeats = atoi(strtok_r(NULL, ",\n ", &strtok_buf));
             //cout << "macroId = " << macroId << "\n";
             Macro *macro = loadMacro(macroId);
             MacroAction *action = new MacroAction(macro->getSequence());
